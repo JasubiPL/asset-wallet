@@ -4,7 +4,7 @@ import { useMemo } from 'react';
 import { usePortfolio } from '@/context/PortfolioContext';
 import * as Portfolio from '@/lib/portfolio';
 import * as Storage from '@/lib/storage';
-import { AssetTypeIcon, IconRecord, IconTrendUp, IconTrash } from '@/lib/icons';
+import { AssetTypeIcon, IconRecord, IconTrendUp, IconTrash, IconEdit } from '@/lib/icons';
 import AssetDetailChart from '../charts/AssetDetailChart';
 
 export default function AssetDetail() {
@@ -50,11 +50,11 @@ export default function AssetDetail() {
           <div className="stat-value">{fmt(perf.currentValue)}</div>
         </div>
         <div className="detail-stat-card">
-          <div className="stat-label">Valor Inicial</div>
-          <div className="stat-value">{fmt(perf.initialValue)}</div>
+          <div className="stat-label">Total Invertido</div>
+          <div className="stat-value">{fmt(perf.totalInvested)}</div>
         </div>
         <div className="detail-stat-card">
-          <div className="stat-label">Cambio</div>
+          <div className="stat-label">Ganancia / Pérdida</div>
           <div className={`stat-value ${isPositive ? 'stat-positive' : 'stat-negative'}`}>{fmt(perf.change)}</div>
         </div>
         <div className="detail-stat-card">
@@ -79,33 +79,32 @@ export default function AssetDetail() {
           <button className="btn btn-primary btn-sm" onClick={() => openModal('record-value', { recordAssetId: assetId })}>Registrar valor</button>
         </div>
       ) : (
+        <div className="tx-table-wrapper">
         <table className="tx-table">
           <thead>
-            <tr><th>Fecha</th><th>Valor</th><th>Cambio</th><th>Nota</th><th></th></tr>
+            <tr><th>Fecha</th><th>Valor</th><th>Aporte</th><th>Nota</th><th></th></tr>
           </thead>
           <tbody>
             {perf.history.map((tx, i) => {
-              const prev = i > 0 ? perf.history[i - 1].value : tx.value;
-              const change = tx.value - prev;
-              const changePct = prev !== 0 ? (change / prev) * 100 : 0;
-              const pos = change >= 0;
               const dateStr = new Date(tx.date + 'T00:00:00').toLocaleDateString('es-MX', { day: '2-digit', month: 'short', year: 'numeric' });
               return (
                 <tr key={tx.id || i}>
                   <td>{dateStr}</td>
                   <td className="value-cell">{fmt(tx.value)}</td>
-                  <td className={i === 0 ? '' : (pos ? 'stat-positive' : 'stat-negative')}>
-                    {i === 0 ? '—' : `${fmt(change)} (${fmtPct(changePct)})`}
-                  </td>
+                  <td>{tx.capitalContribution > 0 ? fmt(tx.capitalContribution) : '—'}</td>
                   <td className="note-cell">{tx.note || '—'}</td>
                   <td>
-                    <button className="btn-icon-action danger" onClick={() => handleDeleteTransaction(tx.id)}><IconTrash size={16} /></button>
+                    <div className="tx-actions">
+                      <button className="btn-icon-action edit" onClick={() => openModal('edit-transaction', { editTxId: tx.id })} title="Editar"><IconEdit size={16} /></button>
+                      <button className="btn-icon-action danger" onClick={() => handleDeleteTransaction(tx.id)} title="Eliminar"><IconTrash size={16} /></button>
+                    </div>
                   </td>
                 </tr>
               );
             })}
           </tbody>
         </table>
+        </div>
       )}
     </section>
   );

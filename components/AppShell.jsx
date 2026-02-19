@@ -10,6 +10,7 @@ import Analytics from './views/Analytics';
 import Settings from './views/Settings';
 import AddAssetModal from './modals/AddAssetModal';
 import RecordValueModal from './modals/RecordValueModal';
+import EditTransactionModal from './modals/EditTransactionModal';
 import Notifications from './ui/Notifications';
 
 const VIEW_TITLES = {
@@ -69,6 +70,7 @@ export default function AppShell() {
 
       {modal === 'add-asset' && <AddAssetModal />}
       {modal === 'record-value' && <RecordValueModal />}
+      {modal === 'edit-transaction' && <EditTransactionModal />}
       <Notifications />
     </div>
   );

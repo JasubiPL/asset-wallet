@@ -38,7 +38,7 @@ export default function Dashboard() {
           <div className="quick-stat-label">Rendimiento</div>
         </div>
         <div className="quick-stat">
-          <div className="quick-stat-value">{fmt(summary.totalInitialValue)}</div>
+          <div className="quick-stat-value">{fmt(summary.totalInvested)}</div>
           <div className="quick-stat-label">Invertido</div>
         </div>
       </div>

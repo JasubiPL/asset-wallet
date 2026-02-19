@@ -24,9 +24,9 @@ function reducer(state, action) {
     case 'REFRESH':
       return { ...state, refreshKey: state.refreshKey + 1 };
     case 'OPEN_MODAL':
-      return { ...state, modal: action.modal, editAssetId: action.editAssetId || null, recordAssetId: action.recordAssetId || null };
+      return { ...state, modal: action.modal, editAssetId: action.editAssetId || null, recordAssetId: action.recordAssetId || null, editTxId: action.editTxId || null };
     case 'CLOSE_MODAL':
-      return { ...state, modal: null, editAssetId: null, recordAssetId: null };
+      return { ...state, modal: null, editAssetId: null, recordAssetId: null, editTxId: null };
     case 'ADD_NOTIFICATION':
       return { ...state, notifications: [...state.notifications, { id: Date.now(), message: action.message, type: action.notifType }] };
     case 'REMOVE_NOTIFICATION':
@@ -127,9 +127,9 @@ export function PortfolioProvider({ children }) {
     }
   }, [refresh, notify, navigateTo, state.view]);
 
-  const handleRecordValue = useCallback(async (assetId, value, date, note) => {
+  const handleRecordValue = useCallback(async (assetId, value, date, note, capitalContribution = 0) => {
     try {
-      await Storage.addTransaction({ assetId, value, date, note });
+      await Storage.addTransaction({ assetId, value, date, note, capitalContribution });
       refresh();
       notify('Valor registrado');
     } catch (err) {
@@ -148,6 +148,17 @@ export function PortfolioProvider({ children }) {
         notify('Error al eliminar registro', 'error');
         console.error(err);
       }
+    }
+  }, [refresh, notify]);
+
+  const handleUpdateTransaction = useCallback(async (txId, updates) => {
+    try {
+      await Storage.updateTransaction(txId, updates);
+      refresh();
+      notify('Registro actualizado');
+    } catch (err) {
+      notify('Error al actualizar registro', 'error');
+      console.error(err);
     }
   }, [refresh, notify]);
 
@@ -233,6 +244,7 @@ export function PortfolioProvider({ children }) {
     handleDeleteAsset,
     handleRecordValue,
     handleDeleteTransaction,
+    handleUpdateTransaction,
     handleSaveSettings,
     handleExport,
     handleImport,

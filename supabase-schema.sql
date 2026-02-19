@@ -19,10 +19,14 @@ create table public.transactions (
   asset_id uuid references public.assets(id) on delete cascade not null,
   user_id uuid references auth.users(id) on delete cascade not null,
   value double precision not null,
+  capital_contribution double precision default 0,
   date text not null,
   note text,
   created_at timestamptz default now()
 );
+
+-- NOTA: Si ya tienes la tabla creada, ejecuta esta migración:
+-- ALTER TABLE public.transactions ADD COLUMN IF NOT EXISTS capital_contribution double precision DEFAULT 0;
 
 -- 3. Tabla de configuración del usuario
 create table public.settings (
