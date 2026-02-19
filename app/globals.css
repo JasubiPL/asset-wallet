@@ -1015,3 +1015,9 @@ textarea.form-control { min-height: 70px; resize: vertical; }
   border-radius: var(--radius-sm);
   font-weight: 800;
 }
+
+.author-link{
+  color: white;
+  text-decoration: none;
+  font-weight: 600;
+}

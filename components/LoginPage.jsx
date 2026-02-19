@@ -109,7 +109,7 @@ export default function LoginPage() {
           </button>
         </p>
 
-        <p className="login-footer">Asset Wallet v2.0 · Powered by Supabase</p>
+        <p className="login-footer">Asset Wallet v1.0.0 · Powered by <a className="author-link" href="https://jasubip.vercel.app" target="_blank" rel="noopener noreferrer">JasubiP</a></p>
       </div>
     </div>
   );
