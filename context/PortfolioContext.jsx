@@ -66,6 +66,12 @@ export function PortfolioProvider({ children }) {
     dispatch({ type: 'NAVIGATE', view, assetId });
   }, []);
 
+  const goBack = useCallback(() => {
+    const parent = { 'asset-detail': 'assets' };
+    const target = parent[state.view] || 'dashboard';
+    dispatch({ type: 'NAVIGATE', view: target });
+  }, [state.view]);
+
   const refresh = useCallback(() => {
     dispatch({ type: 'REFRESH' });
   }, []);
@@ -234,6 +240,7 @@ export function PortfolioProvider({ children }) {
     mounted,
     loading,
     navigateTo,
+    goBack,
     refresh,
     notify,
     removeNotification,

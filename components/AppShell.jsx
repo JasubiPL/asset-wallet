@@ -1,7 +1,7 @@
 'use client';
 
 import { usePortfolio } from '@/context/PortfolioContext';
-import { AppLogo, IconPlus } from '@/lib/icons';
+import { AppLogo, IconPlus, IconBack } from '@/lib/icons';
 import BottomNav from './BottomNav';
 import Dashboard from './views/Dashboard';
 import AssetsList from './views/AssetsList';
@@ -22,7 +22,7 @@ const VIEW_TITLES = {
 };
 
 export default function AppShell() {
-  const { view, modal, openModal, mounted, loading } = usePortfolio();
+  const { view, modal, openModal, goBack, mounted, loading } = usePortfolio();
 
   if (!mounted || loading) return (
     <div className="app-layout" style={{ display: 'flex', alignItems: 'center', justifyContent: 'center', minHeight: '100vh' }}>
@@ -49,7 +49,13 @@ export default function AppShell() {
       {/* Top Header */}
       <header className="top-header">
         <div className="top-header-left">
-          <span className="top-logo"><AppLogo size={22} /></span>
+          {view === 'asset-detail' ? (
+            <button className="btn-back" onClick={goBack} title="Regresar">
+              <IconBack size={22} />
+            </button>
+          ) : (
+            <span className="top-logo"><AppLogo size={22} /></span>
+          )}
           <div>
             <h1 className="top-title">Asset Wallet</h1>
             <span className="top-subtitle">{VIEW_TITLES[view] || 'Dashboard'}</span>

@@ -31,7 +31,6 @@ export default function AssetDetail() {
     <section>
       <div className="detail-header">
         <div className="detail-title-row">
-          <button className="back-btn" onClick={() => navigateTo('assets')}>←</button>
           <div>
             <h2>{asset.name}</h2>
             <span className="text-muted" style={{ display: 'flex', alignItems: 'center', gap: 6 }}><AssetTypeIcon type={asset.type} size={16} /> {typeInfo.label}</span>
