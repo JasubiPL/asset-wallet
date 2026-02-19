@@ -1,7 +1,7 @@
 'use client';
 
 import { usePortfolio } from '@/context/PortfolioContext';
-import { IconPlus, IconWallet } from '@/lib/icons';
+import { AppLogo, IconPlus, IconBack } from '@/lib/icons';
 import BottomNav from './BottomNav';
 import Dashboard from './views/Dashboard';
 import AssetsList from './views/AssetsList';
@@ -10,6 +10,7 @@ import Analytics from './views/Analytics';
 import Settings from './views/Settings';
 import AddAssetModal from './modals/AddAssetModal';
 import RecordValueModal from './modals/RecordValueModal';
+import EditTransactionModal from './modals/EditTransactionModal';
 import Notifications from './ui/Notifications';
 
 const VIEW_TITLES = {
@@ -21,12 +22,12 @@ const VIEW_TITLES = {
 };
 
 export default function AppShell() {
-  const { view, modal, openModal, mounted, loading } = usePortfolio();
+  const { view, modal, openModal, goBack, mounted, loading } = usePortfolio();
 
   if (!mounted || loading) return (
     <div className="app-layout" style={{ display: 'flex', alignItems: 'center', justifyContent: 'center', minHeight: '100vh' }}>
       <div style={{ textAlign: 'center', color: 'var(--text-muted)' }}>
-        <IconWallet size={32} style={{ marginBottom: 12, opacity: 0.5 }} />
+        <AppLogo  />
         <p style={{ fontSize: '0.85rem' }}>Cargando datos...</p>
       </div>
     </div>
@@ -48,7 +49,13 @@ export default function AppShell() {
       {/* Top Header */}
       <header className="top-header">
         <div className="top-header-left">
-          <span className="top-logo"><IconWallet size={22} /></span>
+          {view === 'asset-detail' ? (
+            <button className="btn-back" onClick={goBack} title="Regresar">
+              <IconBack size={22} />
+            </button>
+          ) : (
+            <span className="top-logo"><AppLogo size={22} /></span>
+          )}
           <div>
             <h1 className="top-title">Asset Wallet</h1>
             <span className="top-subtitle">{VIEW_TITLES[view] || 'Dashboard'}</span>
@@ -69,6 +76,7 @@ export default function AppShell() {
 
       {modal === 'add-asset' && <AddAssetModal />}
       {modal === 'record-value' && <RecordValueModal />}
+      {modal === 'edit-transaction' && <EditTransactionModal />}
       <Notifications />
     </div>
   );

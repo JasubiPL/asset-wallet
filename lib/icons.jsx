@@ -46,6 +46,7 @@ import {
   HiOutlineInformationCircle,
   HiOutlineFolderOpen,
   HiOutlineWallet,
+  HiOutlineArrowLeft,
 } from 'react-icons/hi2';
 
 /* ── Asset-type icon components ───────────────────────── */
@@ -94,5 +95,15 @@ export {
   HiOutlineXCircle       as IconXCircle,
   HiOutlineInformationCircle as IconInfo,
   HiOutlineFolderOpen    as IconFolder,
-  HiOutlineWallet        as IconWallet,
+  HiOutlineArrowLeft      as IconBack,
 };
+
+export function AppLogo({ size = 24, style = {} }) {
+  return (
+    <span
+      className="icon-logo"
+    >
+      AW
+    </span>
+  );
+}
