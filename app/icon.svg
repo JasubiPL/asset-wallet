@@ -3,7 +3,7 @@
   <!-- Fondo negro carbón -->
   <rect width="512" height="512" rx="110" fill="#0F0F0F"/>
 
-  <!-- Letras AS -->
+  <!-- Letras AW -->
   <text 
     x="50%" 
     y="54%" 
@@ -12,9 +12,9 @@
     font-family="Helvetica, Arial, sans-serif"
     font-size="220"
     font-weight="800"
-    letter-spacing="-8"
+    letter-spacing="-6"
     fill="#FFFFFF">
-    AS
+    AW
   </text>
 
 </svg>
