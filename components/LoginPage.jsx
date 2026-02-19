@@ -2,7 +2,7 @@
 
 import { useState } from 'react';
 import { useAuth } from '@/context/AuthContext';
-import { IconWallet, IconXCircle } from '@/lib/icons';
+import { AppLogo, IconXCircle } from '@/lib/icons';
 import { HiOutlineLockClosed, HiOutlineEnvelope, HiOutlineEye, HiOutlineEyeSlash } from 'react-icons/hi2';
 
 export default function LoginPage() {
@@ -45,7 +45,7 @@ export default function LoginPage() {
     <div className="login-page">
       <div className="login-card">
         <div className="login-logo">
-          <span className="login-logo-icon"><IconWallet size={24} /></span>
+          <AppLogo />
           <span className="login-logo-text">Asset Wallet</span>
         </div>
         <p className="login-subtitle">

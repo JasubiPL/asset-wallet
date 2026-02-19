@@ -3,7 +3,7 @@
 import { useMemo } from 'react';
 import { usePortfolio } from '@/context/PortfolioContext';
 import * as Portfolio from '@/lib/portfolio';
-import { AssetTypeIcon, IconPieChart, IconWallet, IconPlus } from '@/lib/icons';
+import { AssetTypeIcon, IconPieChart, AppLogo, IconPlus } from '@/lib/icons';
 import AllocationPieChart from '../charts/AllocationPieChart';
 
 export default function Dashboard() {
@@ -63,7 +63,7 @@ export default function Dashboard() {
 
       {summary.assets.length === 0 ? (
         <div className="empty-state">
-          <span className="empty-icon"><IconWallet size={40} /></span>
+          <span className="empty-icon"><AppLogo /></span>
           <p>No tienes activos registrados</p>
           <button className="btn btn-primary btn-sm" onClick={() => openModal('add-asset')}>
             <IconPlus size={16} /> Agregar primer activo

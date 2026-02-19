@@ -1,7 +1,7 @@
 'use client';
 
 import { usePortfolio } from '@/context/PortfolioContext';
-import { IconPlus, IconWallet } from '@/lib/icons';
+import { AppLogo, IconPlus } from '@/lib/icons';
 import BottomNav from './BottomNav';
 import Dashboard from './views/Dashboard';
 import AssetsList from './views/AssetsList';
@@ -26,7 +26,7 @@ export default function AppShell() {
   if (!mounted || loading) return (
     <div className="app-layout" style={{ display: 'flex', alignItems: 'center', justifyContent: 'center', minHeight: '100vh' }}>
       <div style={{ textAlign: 'center', color: 'var(--text-muted)' }}>
-        <IconWallet size={32} style={{ marginBottom: 12, opacity: 0.5 }} />
+        <AppLogo  />
         <p style={{ fontSize: '0.85rem' }}>Cargando datos...</p>
       </div>
     </div>
@@ -48,7 +48,7 @@ export default function AppShell() {
       {/* Top Header */}
       <header className="top-header">
         <div className="top-header-left">
-          <span className="top-logo"><IconWallet size={22} /></span>
+          <span className="top-logo"><AppLogo size={22} /></span>
           <div>
             <h1 className="top-title">Asset Wallet</h1>
             <span className="top-subtitle">{VIEW_TITLES[view] || 'Dashboard'}</span>

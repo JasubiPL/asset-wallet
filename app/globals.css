@@ -71,7 +71,7 @@ body {
   justify-content: space-between;
   height: var(--header-h);
   padding: 0 20px;
-  background: transparent;
+  background: var(--bg-primary);
 }
 
 .top-header-left {
@@ -962,4 +962,12 @@ textarea.form-control { min-height: 70px; resize: vertical; }
   font-weight: 500;
   margin-bottom: 16px;
   text-align: center;
+}
+
+.icon-logo{
+  background-color: #fff;
+  color: #000;
+  padding: 7px;
+  border-radius: var(--radius-sm);
+  font-weight: 800;
 }
