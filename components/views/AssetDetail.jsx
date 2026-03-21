@@ -49,7 +49,7 @@ export default function AssetDetail() {
           <div className="stat-value">{fmt(perf.currentValue)}</div>
         </div>
         <div className="detail-stat-card">
-          <div className="stat-label">Total Invertido</div>
+          <div className="stat-label">Capital Neto</div>
           <div className="stat-value">{fmt(perf.totalInvested)}</div>
         </div>
         <div className="detail-stat-card">
@@ -90,7 +90,13 @@ export default function AssetDetail() {
                 <tr key={tx.id || i}>
                   <td>{dateStr}</td>
                   <td className="value-cell">{fmt(tx.value)}</td>
-                  <td>{tx.capitalContribution > 0 ? fmt(tx.capitalContribution) : '—'}</td>
+                  <td>
+                    {tx.capitalContribution > 0
+                      ? fmt(tx.capitalContribution)
+                      : tx.capitalContribution < 0
+                        ? `-${fmt(Math.abs(tx.capitalContribution))}`
+                        : '—'}
+                  </td>
                   <td className="note-cell">{tx.note || '—'}</td>
                   <td>
                     <div className="tx-actions">
